@@ -15,4 +15,9 @@ public class Product
     public float Stock { get; set; }
 
     public DateTime DateOfRegistry { get; set; }
+
+
+    public int? CategoryId { get; set; }
+    
+    public Catergory? CategoryName { get; set; }
 }
