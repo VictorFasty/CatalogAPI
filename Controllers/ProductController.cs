@@ -1,11 +1,36 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CatalogoAPI.Content;
+using CatalogoAPI.Model;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CatalogoAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
+
+        private readonly AppDbContext _context;
+
+        public ProductController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Product>> Findall()
+        {
+            var products = _context.Products.ToList();
+            if (products is null)
+            {
+                return NotFound("Product not found!!");
+            }
+            return products;
+
+
+        }
     }
 }
