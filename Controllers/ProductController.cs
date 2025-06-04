@@ -36,12 +36,33 @@ namespace CatalogoAPI.Controllers
 
 
         [HttpGet("{id:int}")]
-        public ActionResult<Product> FindById(int id) 
+        public ActionResult<Product> FindById(int id)
         {
             var products = _context.Products.FirstOrDefault(p => p.Id == id);
-            if (products is null) {
+            if (products is null)
+            {
                 return NotFound("Prouct is not found!!");
             }
             return products;
         }
+
+
+
+        [HttpPost]
+        public ActionResult Post(Product product)
+        {
+            if(product is null)
+            {
+                return BadRequest("Not null!!");
+            }
+
+
+            _context.Products.Add(product);
+            _context.SaveChanges();
+            return new CreatedAtRouteResult("GetProduct: ", new {id = product.Id}, product);
+
+
+        }
+    }
+
 }
