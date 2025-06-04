@@ -10,7 +10,7 @@ public class AppDbContext : DbContext
                 
     }
 
-    public DbSet<Catergory>? Cartegories { get; set; }
+    public DbSet<Category>? Cartegories { get; set; }
     public DbSet<Product>? Products { get; set; }
 
 }
