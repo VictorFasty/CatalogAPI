@@ -11,6 +11,7 @@ namespace CatalogoAPI.Controllers
     public class ProductController : ControllerBase
     {
 
+        //Seria equivalente ao repository
         private readonly AppDbContext _context;
 
         public ProductController(AppDbContext context)
@@ -32,5 +33,15 @@ namespace CatalogoAPI.Controllers
 
 
         }
-    }
+
+
+        [HttpGet("{id:int}")]
+        public ActionResult<Product> FindById(int id) 
+        {
+            var products = _context.Products.FirstOrDefault(p => p.Id == id);
+            if (products is null) {
+                return NotFound("Prouct is not found!!");
+            }
+            return products;
+        }
 }
