@@ -63,6 +63,23 @@ namespace CatalogoAPI.Controllers
 
 
         }
+
+
+        [HttpPut("product/{id}")]
+        public ActionResult Put(int id, Product product)
+        {
+            if(id != product.Id) 
+            {
+                return BadRequest("ID not found");    
+           
+            }
+
+            _context.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges(true);
+
+            return Ok(product);
+        }
+
     }
 
 }
