@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CatalogoAPI.Model;
 
@@ -37,6 +38,7 @@ public class Product
 
 
     public int? CategoryId { get; set; }
-    
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
     public Category? CategoryName { get; set; }
 }
