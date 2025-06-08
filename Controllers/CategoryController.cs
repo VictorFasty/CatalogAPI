@@ -17,7 +17,7 @@ namespace CatalogoAPI.Controllers
             _context = context; 
         }
 
-        [HttpGet]
+        [HttpGet("/findall")]
         public ActionResult<IEnumerable<Category>> Findall()
         {
             var category = _context.Cartegories.ToList();
@@ -30,7 +30,7 @@ namespace CatalogoAPI.Controllers
 
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int:min:min(1)}")]
         public ActionResult<Category> FindById(int id)
         {
             var category = _context.Cartegories.FirstOrDefault(p => p.Id == id);
@@ -60,7 +60,7 @@ namespace CatalogoAPI.Controllers
 
 
 
-        [HttpPut("category/{id}")]
+        [HttpPut("category/{id:int:min(1)}")]
         public ActionResult Put(int id, Category category)
         {
             if (id != category.Id)
@@ -78,7 +78,7 @@ namespace CatalogoAPI.Controllers
 
 
 
-        [HttpDelete("delete/{id:int}")]
+        [HttpDelete("delete/{id:int:min(1}")]
         public ActionResult Delete(int id)
         {
             var category = _context.Cartegories.FirstOrDefault(p => p.Id == id);
